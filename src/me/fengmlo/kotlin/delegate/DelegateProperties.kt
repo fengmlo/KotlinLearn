@@ -25,7 +25,7 @@ class DelegateExample {
 val lazyValue: String by lazy(/*LazyThreadSafetyMode.PUBLICATION*/ /*多线程同时调用*/
         /*LazyThreadSafetyMode.NONE*//*不保证线程安全*/) {
     println("this will print on the first call")
-    "value"
+    "value" // 第一次调用结束后，最终值会被缓存，以后再调用直接使用该值，不会调用初始化器
 }
 //endregion
 
@@ -37,15 +37,17 @@ class User {
 
     var nickname: String by Delegates.vetoable("no nickname") { property, oldValue, newValue ->
         println("$oldValue -> $newValue")
-        return@vetoable true // 返回true表示确定更改
+        return@vetoable true // 返回true表示确定更改，返回false表示拦截该次更改
     }
 }
 //endregion
 
+//region 把属性储存在映射中
 class MapUser(val map: MutableMap<String, Any?>) {
     var name: String by map
     var age: Int by map
 }
+//endregion
 
 fun main(args: Array<String>) {
 

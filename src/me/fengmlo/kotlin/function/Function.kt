@@ -3,13 +3,13 @@ package me.fengmlo.kotlin.function
 import com.sun.corba.se.impl.orbutil.graph.Graph
 import sun.security.provider.certpath.Vertex
 
-fun double(x: Int): Int { // 具有代码块体的函数必须显式指定返回类型
+fun double(x: Int): Int { // 具有代码块体的函数必须显式指定返回类型，因为逻辑可能很复杂，导致编译器无法推导
     return 2 * x
 }
 
 fun double2(x: Int) = 2 * x // 单表达式函数返回值类型可推断时可省略
 
-fun read(b: Array<Byte>, off: Int = 0, len: Int = b.size) { // 函数参数必须有显式类型
+fun read(b: Array<Byte>, off: Int = 0, len: Int = b.size) { // 函数参数必须有显式类型，即使是带默认值的函数
     // 函数返回类型为Unit
 }
 
@@ -31,7 +31,7 @@ foo(1) { println("hello") } // 使用默认值 baz = 1
 foo { println("hello") }    // 使用两个默认值 bar = 0 与 baz = 1
 */
 
-infix fun Int.shl(x: Int): Int { // 中缀表示法
+infix fun Int.shl1(x: Int): Int { // 中缀表示法, 会编译为有两个参数的静态方法，第一个参数为接受者类型
     // ……
     return 0
 }
@@ -70,6 +70,8 @@ fun main(args: Array<String>) {
     foo2(1) { println("hello") }
     foo2 { println("hello") }
 
+    println(1 shl1 1)
+
     reformat("123",
             normalizeCase = true,
             upperCaseFirstLetter = true,
@@ -77,4 +79,6 @@ fun main(args: Array<String>) {
             wordSeparator = '_'
     ) // 命名参数，非命名参数必须放在命名参数前，命名参数之间的位置可以随意
 
+    val  list = asList(arrayOf(1, 2, 3))
+    println(list.joinToString())
 }

@@ -16,6 +16,7 @@ class FacebookNamedUser(val accountId: Int) : NamedUser {
     override val nickname = getFacebookName(accountId)
 }
 
+// 覆写属性一般是为了给它自定义getter
 fun main(args: Array<String>) {
     println(PrivateNamedUser("test@kotlinlang.org").nickname)
     println(SubscribingNamedUser("test@kotlinlang.org").nickname)

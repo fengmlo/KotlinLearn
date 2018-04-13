@@ -87,7 +87,7 @@ fun main(args: Array<String>) {
         println(op(a, b))
     }
 
-    val sum2 = fun(a: Int, b:Int) = a + b
+    val sum2 = fun(a: Int, b: Int) = a + b
 
     // 类型兼容，Int.(Int) -> Int 与 (Int, Int) -> Int 兼容
     test(sum, 1, 2)
